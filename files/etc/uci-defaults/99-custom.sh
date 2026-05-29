@@ -48,21 +48,6 @@ echo "Board detected: $board_name" >>$LOGFILE
 wan_ifname="eth2"
 lan_ifnames="eth0"
 
-# 此处特殊处理个别开发板网口顺序问题
-case "$board_name" in
-    "radxa,e20c"|"friendlyarm,nanopi-r5c")
-        wan_ifname="eth1"
-        lan_ifnames="eth0"
-        echo "Using $board_name mapping: WAN=$wan_ifname LAN=$lan_ifnames" >>"$LOGFILE"
-        ;;
-    *)
-        # 默认第一个接口为WAN，其余为LAN
-        wan_ifname=$(echo "$ifnames" | awk '{print $1}')
-        lan_ifnames=$(echo "$ifnames" | cut -d ' ' -f2-)
-        echo "Using default mapping: WAN=$wan_ifname LAN=$lan_ifnames" >>"$LOGFILE"
-        ;;
-esac
-
 # 3. 配置网络
 if [ "$count" -eq 1 ]; then
     # 单网口设备，DHCP模式
