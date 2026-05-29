@@ -44,11 +44,7 @@ echo "Interface count: $count" >>$LOGFILE
 board_name=$(cat /tmp/sysinfo/board_name 2>/dev/null || echo "unknown")
 echo "Board detected: $board_name" >>$LOGFILE
 
-# 脚本默认配置选项
-#wan_ifname=""
-#lan_ifnames=""
-
-# 自用EZProV5为特殊顺序顺序需填上对应网卡默认留空
+# 设置EZProV5正确的网口顺序
 wan_ifname="eth2"
 lan_ifnames="eth0"
 
